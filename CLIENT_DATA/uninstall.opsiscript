@@ -1,0 +1,48 @@
+; Copyright (c) uib gmbh (www.uib.de)
+; This sourcecode is owned by uib gmbh
+; and published under the Terms of the General Public License.
+; credits: http://www.opsi.org/en/credits/
+
+[Actions]
+requiredWinstVersion >= "4.11.3.3"
+
+DefVar $SetupType$
+DefVar $LogDir$
+DefVar $ExitCode$
+DefVar $ErrorMsg$
+DefVar $ProductId$
+DefVar $InstallDir$
+DefVar $OldInstallDir$
+DefVar $ProductName$ 
+DefVar $lastExitCode$
+DefVar $DesktopIconName$
+DefVar $Property_DesktopIcon$
+
+
+Set $LogDir$ = "%opsiLogDir%"
+
+; ----------------------------------------------------------------
+Set $SetupType$ = "common"
+Set $ProductId$       = "zotero"
+Set $ProductName$     = "Zotero"
+Set $InstallDir$      = "%ProgramFiles32Dir%\Zotero"
+Set $OldInstallDir$		= "%ProgramFiles32Dir%\Zotero Standalone"
+Set $DesktopIconName$ = $ProductName$ 
+Set $Property_DesktopIcon$ = GetProductProperty("desktopicon","True")
+; ----------------------------------------------------------------
+
+comment "Show product picture"
+if (FileExists("%ScriptPath%\..\lib\icons\%installingProdName%.png"))
+       comment "logo at local library/icons found."
+       ShowBitmap "%ScriptPath%\..\lib\icons\%installingProdName%.png" $ProductName$
+else
+       comment "no logo at local library/icons, use from ScriptPath ..."
+       ShowBitmap "%ScriptPath%\o4i.png" $ProductName$
+endif
+
+Message "Uninstalling " + $ProductName$ + " ..."
+
+if FileExists("%ScriptPath%\delsub.opsiscript")
+   comment "Start uninstall sub section"
+   Sub "%ScriptPath%\delsub.opsiscript"
+endif

@@ -1,0 +1,147 @@
+; ----------------------------------------------------------------
+; Copyright (c) uib gmbh (www.uib.de)
+; This sourcecode is owned by uib
+; and published under the Terms of the General Public License.
+; credits: http://www.opsi.org/en/credits/
+; ----------------------------------------------------------------
+
+[Initial]
+requiredWinstVersion >= "4.11.4.4"
+ScriptErrorMessages = false
+
+[Actions]
+DefVar $SetupType$
+
+DefVar $ProductId$ 
+DefVar $ProductName$
+
+DefVar $Setupfile$ 
+DefVar $InstallDir$
+DefVar $OldInstallDir$
+DefVar $PathToExe$
+
+DefVar $InstallLanguage$
+DefVar $InstallSilentOption$
+DefVar $ExitCode$
+DefVar $ErrorMsg$
+DefVar $lastExitCode$
+DefVar $NsisInstallBatch$
+DefVar $ProductVersion$
+DefVar $MinimumSpace$
+
+DefVar $DesktopIconName$
+DefVar $Property_DesktopIcon$
+DefVar $CustomPostInstall$
+
+defVar $LogDir$
+DefVar $TmpDir$
+
+Set $LogDir$ = "%opsiLogDir%"
+Set $TmpDir$ = "%opsiTmpDir%"
+
+Set $ProductId$       = "zotero"
+Set $ProductName$     = "Zotero"
+
+Set $SetupType$       	= "common"
+Set $InstallDir$      	= "%ProgramFiles32Dir%\Zotero"
+Set $OldInstallDir$			= "%ProgramFiles32Dir%\Zotero Standalone"
+Set $PathToExe$ 				= $InstallDir$ + "\zotero.exe"
+Set $InstallSilentOption$ = " -ms"
+
+Set $MinimumSpace$	= GetProductProperty("MinimumSpace","200 MB")
+
+Set $ProductVersion$  = strPart("%installingProdVersion%", "1", calculate(strPos("%installingProdVersion%","-") + "-" + "1" ))
+Set $Setupfile$       = "Zotero-" + $ProductVersion$ + "_setup.exe"
+
+Set $DesktopIconName$ = $ProductName$ 
+Set $Property_DesktopIcon$ = GetProductProperty("DesktopIcon","True")
+
+set $CustomPostInstall$ = getProductProperty("custom-post-install","none")
+; ---------------------------------- Main --------------------------------------------
+
+ChangeDirectory "%SCRIPTPATH%"
+if not(HasMinimumSpace ("%SystemDrive%", $MinimumSpace$))
+        LogError "Not enough space on %SystemDrive%, " + $MinimumSpace$ + " on drive %SystemDrive% needed for " + $ProductId$
+        isFatalError "No Space!""
+else
+        comment "Space OK"
+endif
+if not( FileExists($Setupfile$) )
+        LogError "Setupfile NOT exists (" + $Setupfile$ +")"
+        isFatalError "No Setupfile!"
+else
+        comment "Setupfile OK (exists)"
+endif
+
+comment "Show product picture"
+if (FileExists("%ScriptPath%\..\lib\icons\%installingProdName%.png"))
+       comment "logo at local library/icons found."
+       ShowBitmap "%ScriptPath%\..\lib\icons\%installingProdName%.png" $ProductName$ + " " + $ProductVersion$
+else
+       comment "no logo at local library/icons, use from ScriptPath ..."
+       ShowBitmap "%ScriptPath%\o4i.png" $ProductName$ + " " + $ProductVersion$
+endif
+  
+if FileExists("%ScriptPath%\delsub.opsiscript")
+	comment "Start uninstall sub section"
+	message "Uninstall (old) version ..."
+	Sub "%ScriptPath%\delsub.opsiscript"
+else
+	isFatalError "delsub not found!"
+endif
+
+Message "Installiere %installingProdName% (%installingProdVersion%) ..."
+Winbatch_install
+Sub_check_exitcode	
+
+if $Property_DesktopIcon$ = "True"
+   Linkfolder_create
+else
+  Linkfolder_delete
+endif
+
+comment "include custom post install file"
+if not ($CustomPostInstall$ = "none")
+	if FileExists("%ScriptPath%\custom\" + $CustomPostInstall$)
+ 		include_insert "%ScriptPath%\custom\" + $CustomPostInstall$
+	endif
+endif
+
+
+; ----------------------------------------------------------------
+; install sections
+; ----------------------------------------------------------------
+[Winbatch_install]
+"%ScriptDir%\$Setupfile$"  $InstallSilentOption$
+
+[Sub_check_exitcode]
+Set 	$lastExitCode$ = getLastExitCode
+if $lastExitCode$ = "0"
+	comment "ExitCode=0 Installation successful."
+else
+	LogError "ExitCode=" + $lastExitCode$ + "!"
+	isFatalError
+endif
+
+[LinkFolder_create]
+; create an shortcut to the installed exe on AllUsers desktop:
+set_basefolder common_desktopdirectory
+set_subfolder ""
+set_link
+       name: $DesktopIconName$
+       target: $PathToExe$
+       parameters:
+       working_dir: $InstallDir$
+       icon_file:
+       icon_index:
+end_link
+;
+[LinkFolder_delete]
+; delete an shortcut to the installed exe on AllUsers desktop:
+set_basefolder common_desktopdirectory
+set_subfolder ""
+delete_element $DesktopIconName$
+; delete a folder from AllUsers startmenu:
+;set_basefolder common_programs
+;delete_subfolder $ProductId$
+

@@ -1,0 +1,70 @@
+; Copyright (c) uib gmbh (www.uib.de)
+; This sourcecode is owned by uib gmbh
+; and published under the Terms of the General Public License.
+; credits: http://www.opsi.org/en/credits/
+
+DefVar $found$
+DefVar $UninstallProgram$
+DefVar $CustomPostDeinstall$
+
+Killtask "zotero.exe"
+
+Set $found$     = "false"
+Message "Uninstalling (old) %installingProdName% ..."
+
+Set $UninstallProgram$ = $OldInstallDir$ + "\zotero.exe"
+
+comment "include custom post deinstall file"
+set $CustomPostDeinstall$ = getProductProperty("custom-post-deinstall","none")
+
+
+if (not($InstallDir$ = '')) and FileExists($UninstallProgram$)
+	comment "Uninstall program found, starting uninstall"
+	Winbatch_uninstall_nsis /WaitforProcessending "Au_.exe" /Timeoutseconds 10
+	Sub_check_exitcode
+endif
+
+if (not($InstallDir$ = '')) and (not($InstallDir$ = "not used"))
+	Files_uninstall
+endif
+
+Set $UninstallProgram$ = $InstallDir$ + "\zotero.exe"
+
+if (not($InstallDir$ = '')) and FileExists($UninstallProgram$)
+	comment "Uninstall program found, starting uninstall"
+	Winbatch_uninstall_nsis /WaitforProcessending "Au_.exe" /Timeoutseconds 10
+	Sub_check_exitcode
+endif
+
+if (not($InstallDir$ = '')) and (not($InstallDir$ = "not used"))
+	Files_uninstall
+endif
+
+LinkFolder_uninstall
+
+if not ($CustomPostDeinstall$ = "none")
+	if FileExists("%ScriptPath%\custom\" + $CustomPostDeinstall$)
+		include_insert "%ScriptPath%\custom\" + $CustomPostDeinstall$
+	endif
+endif
+
+;-----------------------------------------------------
+[Winbatch_uninstall_nsis]
+"$UninstallProgram$" /S
+
+[Files_uninstall]
+del -sf "$InstallDir$\"
+
+[LinkFolder_uninstall]
+set_basefolder common_desktopdirectory
+set_subfolder ""
+delete_element $DesktopIconName$
+
+[Sub_check_exitcode]
+Set 	$lastExitCode$ = getLastExitCode
+if $lastExitCode$ = "0"
+	comment "ExitCode=0 Installation successful."
+else
+	LogError "ExitCode=" + $lastExitCode$ + "!"
+	isFatalError
+endif

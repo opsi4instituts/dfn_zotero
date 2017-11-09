@@ -1,0 +1,65 @@
+[Package]
+version: 1
+depends: 
+incremental: False
+
+[Product]
+type: localboot
+id: dfn_zotero
+name: Zotero Literaturverwaltung
+description: Zotero is a free, easy-to-use tool to help you collect, organize, cite, and share your research sources.
+advice: 
+version: 5.0.24
+priority: 0
+licenseRequired: False
+productClasses: 
+setupScript: setup.opsiscript
+uninstallScript: uninstall.opsiscript
+updateScript: 
+alwaysScript: 
+onceScript: 
+customScript: 
+userLoginScript: 
+
+[ProductProperty]
+type: bool
+name: desktopicon
+description: Sets an icon on the desktop.
+default: True
+
+[ProductProperty]
+type: unicode
+name: minimumspace
+multivalue: False
+editable: True
+description: required hdd space for installation
+values: ["200 MB"]
+default: ["200 MB"]
+
+[ProductProperty]
+type: unicode
+name: custom-post-install
+multivalue: False
+editable: False
+description: Define filename for include script in custom directory after installation
+values: ["none", "post-install.opsiinc"]
+default: ["none"]
+
+[ProductProperty]
+type: unicode
+name: custom-post-deinstall
+multivalue: False
+editable: False
+description: Define filename for include script in custom directory after deinstallation
+values: ["none", "post-deinstall.opsiinc"]
+default: ["none"]
+
+[Changelog]
+dfn_zotero (5.0.24-1) stable; urgency=low
+
+ * Update auf 5.0.24, Exe getauscht
+ * Icon-Switch eingebaut
+ * custom-Verzeichnis eingebaut
+ * Desktop-Link Property eingebaut
+
+ -- Eric Esser <eric.esser@wzb.eu>  Wed, 08 Nov 2017 13:11:01 +0000
