@@ -7,6 +7,9 @@ DefVar $found$
 DefVar $UninstallProgram$
 DefVar $CustomPostDeinstall$
 
+comment "include custom post deinstall file"
+set $CustomPostDeinstall$ = getProductProperty("custom-post-deinstall","none")
+
 Killtask "zotero.exe"
 
 Set $found$     = "false"
@@ -14,21 +17,13 @@ Message "Uninstalling (old) %installingProdName% ..."
 
 Set $UninstallProgram$ = $OldInstallDir$ + "\zotero.exe"
 
-comment "include custom post deinstall file"
-set $CustomPostDeinstall$ = getProductProperty("custom-post-deinstall","none")
-
-
 if (not($InstallDir$ = '')) and FileExists($UninstallProgram$)
 	comment "Uninstall program found, starting uninstall"
 	Winbatch_uninstall_nsis /WaitforProcessending "Au_.exe" /Timeoutseconds 10
 	Sub_check_exitcode
 endif
 
-if (not($InstallDir$ = '')) and (not($InstallDir$ = "not used"))
-	Files_uninstall
-endif
-
-Set $UninstallProgram$ = $InstallDir$ + "\zotero.exe"
+Set $UninstallProgram$ = $InstallDir$ + "\uninstall\helper.exe"
 
 if (not($InstallDir$ = '')) and FileExists($UninstallProgram$)
 	comment "Uninstall program found, starting uninstall"
