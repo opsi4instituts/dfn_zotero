@@ -50,5 +50,7 @@ Temporary Items
 *.exe
 *.bak
 *.opsi
+*.md5
 
+*.lst
 *~ 
