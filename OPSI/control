@@ -9,7 +9,7 @@ id: dfn_zotero
 name: Zotero Literaturverwaltung
 description: Zotero is a free, easy-to-use tool to help you collect, organize, cite, and share your research sources.
 advice: 
-version: 5.0.28
+version: 5.0.29
 priority: 0
 licenseRequired: False
 productClasses: 
@@ -55,6 +55,13 @@ values: ["none", "post-deinstall.opsiinc"]
 default: ["none"]
 
 [Changelog]
+dfn_zotero (5.0.29-1) stable; urgency=low
+
+ * minor update, exe changend
+ * undefine+delete $found$: delsub.opsiscript
+
+ -- Detlef Krummel <krummel@gei.de>  30.11.2017
+
 dfn_zotero (5.0.28-1) stable; urgency=low
 
 Update auf 5.0.28, exe gestauscht.

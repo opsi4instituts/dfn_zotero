@@ -18,16 +18,15 @@ DefVar $lastExitCode$
 DefVar $DesktopIconName$
 DefVar $Property_DesktopIcon$
 
-
 Set $LogDir$ = "%opsiLogDir%"
 
 ; ----------------------------------------------------------------
 Set $SetupType$ = "common"
-Set $ProductId$       = "zotero"
-Set $ProductName$     = "Zotero"
-Set $InstallDir$      = "%ProgramFiles32Dir%\Zotero"
-Set $OldInstallDir$		= "%ProgramFiles32Dir%\Zotero Standalone"
-Set $DesktopIconName$ = $ProductName$ 
+Set $ProductId$		= "zotero"
+Set $ProductName$	= "Zotero"
+Set $InstallDir$	= "%ProgramFiles32Dir%\Zotero"
+Set $OldInstallDir$	= "%ProgramFiles32Dir%\Zotero Standalone"
+Set $DesktopIconName$	= $ProductName$ 
 Set $Property_DesktopIcon$ = GetProductProperty("desktopicon","True")
 ; ----------------------------------------------------------------
 
@@ -40,7 +39,7 @@ else
        ShowBitmap "%ScriptPath%\o4i.png" $ProductName$
 endif
 
-Message "Uninstalling " + $ProductName$ + " ..."
+Message "uninstalling (old) %installingProdName% ..."
 
 if FileExists("%ScriptPath%\delsub.opsiscript")
    comment "Start uninstall sub section"

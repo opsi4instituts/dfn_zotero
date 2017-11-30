@@ -3,7 +3,6 @@
 ; and published under the Terms of the General Public License.
 ; credits: http://www.opsi.org/en/credits/
 
-DefVar $found$
 DefVar $UninstallProgram$
 DefVar $CustomPostDeinstall$
 
@@ -12,8 +11,7 @@ set $CustomPostDeinstall$ = getProductProperty("custom-post-deinstall","none")
 
 Killtask "zotero.exe"
 
-Set $found$     = "false"
-Message "Uninstalling (old) %installingProdName% ..."
+Message "uninstalling (old) %installingProdName% ..."
 
 Set $UninstallProgram$ = $OldInstallDir$ + "\zotero.exe"
 

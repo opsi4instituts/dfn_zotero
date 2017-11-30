@@ -44,8 +44,8 @@ Set $ProductName$     = "Zotero"
 
 Set $SetupType$       	= "common"
 Set $InstallDir$      	= "%ProgramFiles32Dir%\Zotero"
-Set $OldInstallDir$			= "%ProgramFiles32Dir%\Zotero Standalone"
-Set $PathToExe$ 				= $InstallDir$ + "\zotero.exe"
+Set $OldInstallDir$	= "%ProgramFiles32Dir%\Zotero Standalone"
+Set $PathToExe$ 	= $InstallDir$ + "\zotero.exe"
 Set $InstallSilentOption$ = " -ms"
 
 Set $MinimumSpace$	= GetProductProperty("MinimumSpace","200 MB")
@@ -84,13 +84,12 @@ endif
   
 if FileExists("%ScriptPath%\delsub.opsiscript")
 	comment "Start uninstall sub section"
-	message "Uninstall (old) version ..."
 	Sub "%ScriptPath%\delsub.opsiscript"
 else
 	isFatalError "delsub not found!"
 endif
 
-Message "Installiere %installingProdName% (%installingProdVersion%) ..."
+Message "installing (new)  %installingProdName% (%installingProdVersion%) ..."
 Winbatch_install
 Sub_check_exitcode	
 
@@ -144,4 +143,3 @@ delete_element $DesktopIconName$
 ; delete a folder from AllUsers startmenu:
 ;set_basefolder common_programs
 ;delete_subfolder $ProductId$
-
