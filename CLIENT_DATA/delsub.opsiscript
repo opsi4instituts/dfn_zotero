@@ -13,19 +13,23 @@ Killtask "zotero.exe"
 
 Message "uninstalling (old) %installingProdName% ..."
 
+; Version 4.x
 Set $UninstallProgram$ = $OldInstallDir$ + "\zotero.exe"
-
 if (not($InstallDir$ = '')) and FileExists($UninstallProgram$)
-	comment "Uninstall program found, starting uninstall"
-	Winbatch_uninstall_nsis /WaitforProcessending "Au_.exe" /Timeoutseconds 10
+	comment "Uninstall 4.x program found, starting uninstall"
+;	Winbatch_uninstall_nsis /WaitforProcessending "Au_.exe" /Timeoutseconds 10
+;	Winbatch_uninstall_nsis /WaitforProcessending "Au_.exe"
+	Winbatch_uninstall_nsis /WaitforProcessending "Au_.exe" /Timeoutseconds 45
 	Sub_check_exitcode
 endif
 
+; since Version 5.x
 Set $UninstallProgram$ = $InstallDir$ + "\uninstall\helper.exe"
-
 if (not($InstallDir$ = '')) and FileExists($UninstallProgram$)
-	comment "Uninstall program found, starting uninstall"
-	Winbatch_uninstall_nsis /WaitforProcessending "Au_.exe" /Timeoutseconds 10
+	comment "Uninstall 5.x program found, starting uninstall"
+;	Winbatch_uninstall_nsis /WaitforProcessending "Au_.exe" /Timeoutseconds 10
+;	Winbatch_uninstall_nsis /WaitforProcessending "Au_.exe"
+	Winbatch_uninstall_nsis /WaitforProcessending "Au_.exe" /Timeoutseconds 45
 	Sub_check_exitcode
 endif
 

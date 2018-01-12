@@ -9,7 +9,7 @@ id: dfn_zotero
 name: Zotero Literaturverwaltung
 description: Zotero is a free, easy-to-use tool to help you collect, organize, cite, and share your research sources.
 advice: 
-version: 5.0.29
+version: 5.0.34
 priority: 0
 licenseRequired: False
 productClasses: 
@@ -55,35 +55,53 @@ values: ["none", "post-deinstall.opsiinc"]
 default: ["none"]
 
 [Changelog]
-dfn_zotero (5.0.29-1) stable; urgency=low
+dfn_zotero (5.0.34-1) stable; urgency=low
 
+ * minor update, only .exe changed
+ * Problem De-Installion: IMMER noch vorhanden
+
+ -- Detlef Krummel <krummel@gei.de>  12.01.2018
+
+dfn_zotero (5.0.32-1) stable; urgency=low
+ * minor update, only .exe changed
+ * Problem De-Installion:                  (wird beendet, SW ist NICHT  deinstalliert!
+ * [6] [Dez 18 09:15:58:176] [dfn_zotero]       Call ""C:\Program Files(x86)\Zotero\uninstall\helper.exe" /S"
+ * [6] [Dez 18 09:15:58:176] [dfn_zotero]          Timeout 10 seconds
+ * [6] [Dez 18 09:15:58:176] [dfn_zotero]          Waiting until process "Au_.exe" started and has ended
+ * [6] [Dez 18 09:15:58:176] [dfn_zotero]       Start process as invoker: SYSTEM
+ * [6] [Dez 18 09:15:58:194] [dfn_zotero]       Waiting for start of "Au_.exe"
+ * [7] [Dez 18 09:15:59:199] [dfn_zotero]       Waiting for ending at 18.12.2017 09:15:59 exitcode is: 0
+ * [7] [Dez 18 09:16:00:203] [dfn_zotero]       Waiting for ending at 18.12.2017 09:16:00 exitcode is: 0
+ * [7] [Dez 18 09:16:01:207] [dfn_zotero]       Waiting for ending at 18.12.2017 09:16:01 exitcode is: 0
+ * [7] [Dez 18 09:16:02:213] [dfn_zotero]       Waiting for ending at 18.12.2017 09:16:02 exitcode is: 0
+ * [7] [Dez 18 09:16:03:219] [dfn_zotero]       Waiting for ending at 18.12.2017 09:16:03 exitcode is: 0
+ * [7] [Dez 18 09:16:04:222] [dfn_zotero]       Waiting for ending at 18.12.2017 09:16:04 exitcode is: 0
+ * [7] [Dez 18 09:16:05:224] [dfn_zotero]       Waiting for ending at 18.12.2017 09:16:05 exitcode is: 0
+ * [7] [Dez 18 09:16:06:227] [dfn_zotero]       Waiting for ending at 18.12.2017 09:16:06 exitcode is: 0
+ * [7] [Dez 18 09:16:07:230] [dfn_zotero]       Waiting for ending at 18.12.2017 09:16:07 exitcode is: 0
+ * [7] [Dez 18 09:16:08:233] [dfn_zotero]       Waiting for ending at 18.12.2017 09:16:08 exitcode is: 0
+ * [6] [Dez 18 09:16:08:235] [dfn_zotero]       Waiting for "Au_.exe" stopped -time out 10 sec
+ * [6] [Dez 18 09:16:08:235] [dfn_zotero]       ExitCode 0    Executed process ""C:\Program Files (x86)\Zotero\uninstall\helper.exe" /S"
+ -- Detlef Krummel <krummel@gei.de>  18.12.2017
+dfn_zotero (5.0.30-1) stable; urgency=low
+ * minor update, exe changend
+ -- Detlef Krummel <krummel@gei.de>  04.12.2017
+dfn_zotero (5.0.29-1) stable; urgency=low
  * minor update, exe changend
  * undefine+delete $found$: delsub.opsiscript
-
  -- Detlef Krummel <krummel@gei.de>  30.11.2017
-
 dfn_zotero (5.0.28-1) stable; urgency=low
-
 Update auf 5.0.28, exe gestauscht.
-
  -- Eric Esser <eric.esser@wzb.eu>  Wed, 22 Nov 2017 15:21:32 +0000
-
 dfn_zotero (5.0.27-2) stable; urgency=low
-
 Uninstaller gefixed.
-
  -- Eric Esser <eric.esser@wzb.eu>  Tue, 21 Nov 2017 14:00:48 +0000
-
 dfn_zotero (5.0.27-1) stable; urgency=low
-
  * minor update
-
  -- Detlef Krummel <krummel@gei.de>  20.11.2017
-
 dfn_zotero (5.0.25-1) stable; urgency=low
  * minor update
  -- Detlef Krummel <krummel@gei.de>  13.11.2017
-
 dfn_zotero (5.0.24-1) stable; urgency=low
  * Update auf 5.0.24, Exe getauscht
  * Icon-Switch eingebaut
