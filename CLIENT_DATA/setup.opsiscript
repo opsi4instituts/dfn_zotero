@@ -79,7 +79,7 @@ if (FileExists("%ScriptPath%\..\lib\icons\%installingProdName%.png"))
        ShowBitmap "%ScriptPath%\..\lib\icons\%installingProdName%.png" $ProductName$ + " " + $ProductVersion$
 else
        comment "no logo at local library/icons, use from ScriptPath ..."
-       ShowBitmap "%ScriptPath%\o4i.png" $ProductName$ + " " + $ProductVersion$
+       ShowBitmap "%ScriptPath%\o4i.png" $ProductName$
 endif
   
 if FileExists("%ScriptPath%\delsub.opsiscript")
