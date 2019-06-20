@@ -7,9 +7,10 @@ incremental: False
 type: localboot
 id: dfn_zotero
 name: Zotero Literaturverwaltung
-description: Zotero is a free, easy-to-use tool to help you collect, organize, cite, and share your research sources.
+description: Zotero ist ein kostenloses, benutzerfreundliches Tool, mit dem Sie Ihre Forschungsquellen sammeln, organisieren, zitieren und freigeben können. [Zotero is a free, easy-to-use tool to help you collect, organize, cite, and share your research
+sources.]
 advice: 
-version: 5.0.67
+version: 5.0.68
 priority: 0
 licenseRequired: False
 productClasses: 
@@ -55,12 +56,16 @@ values: ["none", "post-deinstall.opsiinc"]
 default: ["none"]
 
 [Changelog]
-dfn_zotero (5.0.67-1) stable; urgency=low
+dfn_zotero (5.0.68-1) stable; urgency=low
 
  * minor update, only .exe changed
+ * german description added
 
+ -- Detlef Krummel <krummel@gei.de>  20.6.2019
+
+dfn_zotero (5.0.67-1) stable; urgency=low
+ * minor update, only .exe changed
  -- Detlef Krummel <krummel@gei.de>  15.6.2019
-
 dfn_zotero (5.0.65-1) stable; urgency=low
  * minor update, only .exe changed
  -- Detlef Krummel <krummel@gei.de>  27.3.2019
